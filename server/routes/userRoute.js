@@ -9,10 +9,10 @@ const user_controller = require("../controllers/userController");
 const auth = require("../middleware/auth");
 user_route.post('/register',user_controller.register_user);
 user_route.post('/login', user_controller.user_login);
-
-user_route.get('/test',function(req,res){
-   res.status(200).send({success:true,msg:"Authenticated"})
-})
+user_route.get('/user/:userId',user_controller.getUser);
+user_route.put('/user/:userId',user_controller.updateUser);
+user_route.delete('/user/:userId',user_controller.deleteUser);
+user_route.get('/getallUsers',user_controller.getUsers)
 //update password route
 user_route.post('/update-password',auth,user_controller.update_password)
 

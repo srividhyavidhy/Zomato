@@ -31,12 +31,12 @@ const getRestaurent =  async(req,res)=>{
 const updateRestaurent = async(req, res) => {
   try{
     const {restaurentId} = req.params;
-    const restaurent =await Restaurent.findByIdAndUpdate(restaurentId, req.body);
+    const restaurent =await Restaurent.findOneAndUpdate({restaurentId}, req.body);
     //we cannot find any RestaurentId in database
     if(!restaurent){
-        res.status(400).send({result:false,msg:'cannot find any product with ID ${_id}'});
+        res.status(400).send({result:false,msg:'cannot find any product with ID ${restaurentId}'});
     }
-    const updatedrestaurent = await Restaurent.findById(restaurentId);
+    const updatedrestaurent = await Restaurent.findOne({restaurentId});
     res.status(200).send({result:true,message:"Restaurent Data", data:updatedrestaurent});
 }catch (error) {
     res.status(400).send({result:false,msg:error.message});
@@ -46,10 +46,10 @@ const updateRestaurent = async(req, res) => {
 const deleteRestaurent = async(req, res) => {
   try{
     const {restaurentId} = req.params;
-    const restaurent =await Restaurent.findByIdAndDelete(restaurentId);
+    const restaurent =await Restaurent.findOneAndDelete({restaurentId});
     //we cannot find any Restaurent in database
     if(!restaurent){
-        res.status(400).send({result:false,msg:'cannot find any product with ID ${_id}'});
+        res.status(400).send({result:false,msg:'cannot find any product with ID ${restaurentId}'});
     }
     res.status(200).send({result:true,message:"Product Data", data:restaurent});
 }catch (error) {

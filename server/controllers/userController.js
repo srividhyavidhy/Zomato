@@ -248,11 +248,52 @@ const  refresh_token = async(req,res)=>{
        
     }
 }
-
+// get single User
+const getUser =  async(req,res)=>{
+  try{
+    const {userId} = req.params;
+    const user =await User.findOne({userId});
+    res.status(200).send({result:true,message:"User Data", data:user});
+}catch (error) {
+    res.status(400).send({result:false,msg:error.message});
+}
+}
+//update a User
+const updateUser = async(req, res) => {
+  try{
+    const {userId} = req.params;
+    const user =await User.findOneAndUpdate({userId}, req.body);
+    //we cannot find any RestaurentId in database
+    if(!user){
+        res.status(400).send({result:false,msg:'cannot find any user with ID ${userId}'});
+    }
+    const updateduser = await User.findOne({userId});
+    res.status(200).send({result:true,message:"User Data", data:updateduser});
+}catch (error) {
+    res.status(400).send({result:false,msg:error.message});
+}
+}
+//delete a users
+const deleteUser = async(req, res) => {
+  try{
+    const {userId} = req.params;
+    const user =await User.findOneAndDelete({userId});
+    //we cannot find any user in database
+    if(!user){
+        res.status(400).send({result:false,msg:'cannot find any user with ID ${userId}'});
+    }
+    res.status(200).send({result:true,message:"User Data", data:user});
+}catch (error) {
+    res.status(400).send({result:false,msg:error.message});
+}
+}
 module.exports = {
     register_user,
     user_login,
     getUsers,
+    getUser,
+    updateUser,
+    deleteUser,
     update_password,
     forget_password,
     reset_password,
