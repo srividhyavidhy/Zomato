@@ -1,0 +1,43 @@
+       <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-info">
+                <h5 class="modal-title">Register Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body bg-warning">
+                <div class="form-group mb-lg-0">
+                    <label>UserId</label>
+                    <input type="userId" class="form-control" placeholder="UserId"  
+                    [(ngModel)]="signupForm.userId" name="userId" > 
+                    <label>UserName</label>
+                    <input type="userName" class="form-control" placeholder="UserName"  
+                    [(ngModel)]="signupForm.userName" name="userName" > 
+                  <label>Email</label>
+                  <input type="email" class="form-control" placeholder="Email"  
+                  [(ngModel)]="signupForm.email" name="email" > 
+                  <label>Password</label>
+                  <input type="password" class="form-control" placeholder="*******"
+                  [(ngModel)]="signupForm.password" name="password" > 
+                  <label>Role</label>
+                  <input type="role" class="form-control" placeholder="Role"  
+                  [(ngModel)]="signupForm.role" name="role" >  
+                  <label>mobileNo</label>
+                  <input type="mobileNo" class="form-control" placeholder="mobileNo"  
+                  [(ngModel)]="signupForm.mobileNo" name="mobileNo" >
+                  <label>restaurentId</label>
+                  <input type="restaurentId" class="form-control" placeholder="restaurentId"  
+                  [(ngModel)]="signupForm.restaurentId" name="restaurentId" >     
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dander mx-2" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="register()">Register</button>
+              </div>
+            </div>
+          </div>
+        </div>
+               

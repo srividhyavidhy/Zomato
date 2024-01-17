@@ -7,8 +7,10 @@ const nodemailer = require("nodemailer");
 const randomstring = require('randomstring');
 const res = require('express/lib/response');
 
+
 //refresh token
 const fs = require('fs');
+
 
 const sendResetPasswordMail = async(name,email,token)=>{
     try {
@@ -99,7 +101,6 @@ const getUsers = async(req, res) => {
         res.status(400).send({success:false,msg:error.message});
     }
 }
-//login Method
 const user_login = async(req,res)=>{
     try {
         const email = req.body.email;
@@ -109,16 +110,15 @@ const user_login = async(req,res)=>{
         if(userData){
           const passwordMatch = await bcryptjs.compare(password,userData.password);
           if(passwordMatch){
-             const tokenData = await create_token(userData._id);
+             const tokenData = await create_token(userData.userId);
             const userResult = {
-                userId:req.body.userId,
-                userName:req.body.userName,
-                email:req.body.email,
-                password:spassword,
-                mobileNo:req.body.mobileNo,
-                imageUrl:req.body.imageUrl,
-                restaurentId:req.body.restaurentId,
-                role:req.body.role,
+                userId:userData.userId,
+                userName:userData.userName,
+                email:userData.email,
+                password:userData.password,
+                restaurentId:userData.restaurentId,
+                mobileNo:userData.mobileNo,
+                role:userData.role,
                 token:tokenData
             }
 
@@ -287,6 +287,15 @@ const deleteUser = async(req, res) => {
     res.status(400).send({result:false,msg:error.message});
 }
 }
+//signout
+const signout = async (req, res) => {
+    try {
+      req.session = null;
+      return res.status(200).send({ message: "You've been signed out!" });
+    } catch (err) {
+      this.next(err);
+    }
+  };
 module.exports = {
     register_user,
     user_login,
@@ -297,5 +306,6 @@ module.exports = {
     update_password,
     forget_password,
     reset_password,
-    refresh_token
+    refresh_token,
+    signout
 }

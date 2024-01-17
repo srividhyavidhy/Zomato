@@ -13,6 +13,7 @@ user_route.get('/user/:userId',user_controller.getUser);
 user_route.put('/user/:userId',user_controller.updateUser);
 user_route.delete('/user/:userId',user_controller.deleteUser);
 user_route.get('/getallUsers',user_controller.getUsers)
+user_route.get('/signout',user_controller.signout)
 //update password route
 user_route.post('/update-password',auth,user_controller.update_password)
 
